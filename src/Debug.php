@@ -7,7 +7,7 @@ namespace CoreWine\Component;
  */
 class Debug{
 
-	public static $data;
+	public static $data = [];
 
 	/**
 	 * Add to stack.
@@ -15,14 +15,20 @@ class Debug{
 	 * @param DataType $data
 	 */
 	public static function add($data){
-		Debug::$data[] = $data;
+		self::$data[] = $data;
 	}
 
 	/**
 	 * Print the stack.
 	 */
 	public static function print(){
-		print_r(Debug::$data);
+		print_r(self::$data);
+	}
+	/**
+	 * Print the stack.
+	 */
+	public static function get(){
+		return self::$data;
 	}
 }
 
