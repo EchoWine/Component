@@ -4,10 +4,16 @@ namespace CoreWine\Component;
 
 use Iterator;
 use ArrayAccess;
+use Countable;
 
-class Collection implements Iterator,ArrayAccess{
+class Collection implements Iterator,ArrayAccess,Countable{
 
     protected $container = [];
+
+    public function count(){
+        static $count = 0;
+        return ++$count;
+    }
 
     public function __construct($array = []){
         if(is_array($array)){
