@@ -34,6 +34,10 @@ class Collection implements Iterator,ArrayAccess,Countable{
         $container = key($this -> container);
         return $container;
     }
+
+    public function has($value){
+        return in_array($value,$this -> container);
+    }
   
     public function next(){
         $container = next($this -> container);
