@@ -34,6 +34,19 @@ class Str{
 			return null;
 		}
 	}
+
+	/**
+	 * Sanatize string in order to save as filename
+	 *
+	 * @param string $str
+	 *
+	 * @return string 
+	 */
+	public static function filename($str){
+		$str = mb_ereg_replace("([^\w\s\d\-_~,;\[\]\(\).])", '', $str);
+		$str = mb_ereg_replace("([\.]{2,})", '', $str);
+		return $str;
+	}
 }
 
 ?>
