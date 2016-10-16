@@ -27,5 +27,13 @@ class Collection extends \ArrayObject{
     public function merge($array){
     	return new Collection(array_merge((array)$this,(array)$array));
     }
+
+    public function toArray(){
+        $array = [];
+        foreach($this as $n => $k){
+            $array[$n] = $k;
+        }
+        return $array;
+    }
     
 }
