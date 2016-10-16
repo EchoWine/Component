@@ -35,5 +35,26 @@ class Collection extends \ArrayObject{
         }
         return $array;
     }
+
+    public function sortBy($value,$type = 'string',$direction = 'ASC'){
+        $array = (array)$this;
+
+        usort($array,function($a,$b) use($value,$type,$direction){
+
+            $a = $a -> {$value};
+            $b = $b -> {$value};
+
+            switch($type){
+                case 'string':
+                    return $direction == 'ASC' ? strcmp($a,$b) : strcmp($b,$a);
+                break;
+                case 'number':
+                    return $direction == 'ASC' ? $a > $b : $b > $a;
+                break;
+            }
+        });
+
+        return new Collection($array);
+    }
     
 }
