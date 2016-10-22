@@ -57,4 +57,52 @@ class Collection extends \ArrayObject{
         return new Collection($array);
     }
     
+    public function map($closure){
+        return new Collection(array_map($closure,$this -> toArray()));
+    }
+
+    public function count(){
+        return count($this -> toArray());
+    }
+
+
+    /**
+     * Retrieve index
+     *
+     * @param mixed $value
+     *
+     * @return int
+     */
+    public function index($value){
+
+        foreach($this as $n => $k){
+            if(is_object($value) && is_callable([$value,'equalTo'])){
+                if($value -> equalTo($k)){
+                    return $n;
+                }
+            }else{
+
+                if($value == $k){
+                    return $n;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public function remove($value){
+        $index = $this -> index($value);
+
+        if($index !== false)
+            $this -> unset($index);
+    }
+
+    public function unset($index){
+        unset($this[$index]);
+    }
+
+    public function __toString(){
+        return json_encode($this -> toArray());
+    }
 }
