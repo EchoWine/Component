@@ -17,6 +17,12 @@ class DateTime extends \DateTime{
         parent::__construct($datetime,$timezone);
     }
 
+    public static function createFromFormat($format,$value,$object = null){
+        $datetime = parent::createFromFormat($format,$value,$object);
+        return new static($datetime -> format('Y-m-d H:i:s'));
+    }
+
+
     /**
      * Return a clone
      *
