@@ -5,8 +5,9 @@ namespace CoreWine\Component;
 use Countable;
 use ArrayAccess;
 use Iterator;
+use JsonSerializable;
 
-class Collection implements ArrayAccess, Countable, Iterator{
+class Collection implements ArrayAccess, Countable, Iterator, JsonSerializable{
 
     /**
      * The items contained in the collection
@@ -113,6 +114,11 @@ class Collection implements ArrayAccess, Countable, Iterator{
     public function count(){
         return count($this -> items);
     }
+
+    public function jsonSerialize(){
+        return $this -> toArray();
+    }
+
 
     /**
      * Fill the collection
