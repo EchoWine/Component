@@ -123,7 +123,7 @@ class Collection implements ArrayAccess, Countable, Iterator{
         
         $this -> items = [];
 
-        foreach($this as $n => $k){
+        foreach($items as $n => $k){
             $this -> items[$n] = $k;
         }
     }
