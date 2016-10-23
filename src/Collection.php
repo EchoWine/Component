@@ -210,8 +210,8 @@ class Collection implements ArrayAccess, Countable, Iterator, JsonSerializable{
      * @return Collection
      */
     public function sortBy($value,$type = 'string',$direction = 'ASC'){
-        $array = (array)$this;
 
+        $array = $this -> items;
         usort($array,function($a,$b) use($value,$type,$direction){
 
             $a = $a -> {$value};
