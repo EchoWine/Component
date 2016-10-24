@@ -2,7 +2,9 @@
 
 namespace CoreWine\Component;
 
-class DateTime extends \DateTime{
+use JsonSerializable;
+
+class DateTime extends \DateTime implements JsonSerializable{
 
     /**
      * Construct
@@ -22,6 +24,14 @@ class DateTime extends \DateTime{
         return new static($datetime -> format('Y-m-d H:i:s'));
     }
 
+    /**
+     * to json
+     *
+     * @return array
+     */
+    public function jsonSerialize(){
+        return $this -> format('Y-m-d H:i:s');
+    }
 
     /**
      * Return a clone

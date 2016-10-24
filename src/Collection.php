@@ -115,6 +115,11 @@ class Collection implements ArrayAccess, Countable, Iterator, JsonSerializable{
         return count($this -> items);
     }
 
+    /**
+     * to json
+     *
+     * @return array
+     */
     public function jsonSerialize(){
         return $this -> toArray();
     }
