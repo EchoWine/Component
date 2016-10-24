@@ -179,7 +179,20 @@ class Collection implements ArrayAccess, Countable, Iterator, JsonSerializable{
      * @param mixed $array
      */
     public function merge($array){
-    	return new Collection(array_merge($this -> items,(array)$array));
+        if($array instanceof self){
+            $array = $array -> items();
+        }
+
+    	return new Collection(array_merge($this -> items,$array));
+    }
+
+    /**
+     * Retrieve items
+     *
+     * @return Array
+     */
+    public function items(){
+        return $this -> items;
     }
 
     /**
