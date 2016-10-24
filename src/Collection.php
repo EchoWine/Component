@@ -173,9 +173,10 @@ class Collection implements ArrayAccess, Countable, Iterator, JsonSerializable{
     		if(is_object($k)){
     			$k -> {$name} = $value;
     		}else{
-    			$v[$n][$name] = $value; 
+    			$this -> items[$n][$name] = $value; 
     		}
     	}
+        
     }
 
     /**
