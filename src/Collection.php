@@ -219,6 +219,48 @@ class Collection implements ArrayAccess, Countable, Iterator, JsonSerializable{
         return $this -> items;
     }
 
+
+    /**
+     * Where not
+     *
+     * @return Collection
+     */
+    public function whereNot($field,$values){
+
+        if(!is_array($values))
+            $values = [$values];
+
+        $r = [];
+        foreach($this as $k){
+            if(!in_array($k -> $field,$values)){
+                $r[] = $k;
+            }
+        }
+
+        return new Collection($r);
+    }
+
+
+    /**
+     * Where not
+     *
+     * @return Collection
+     */
+    public function where($field,$values){
+
+        if(!is_array($values))
+            $values = [$values];
+
+        $r = [];
+        foreach($this as $k){
+            if(in_array($k -> $field,$values)){
+                $r[] = $k;
+            }
+        }
+
+        return new Collection($r);
+    }
+
     /**
      * Sort the elements by a value, type and direction
      *
