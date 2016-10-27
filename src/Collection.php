@@ -228,21 +228,44 @@ class Collection implements ArrayAccess, Countable, Iterator, JsonSerializable{
      *
      * @return Collection
      */
-    public function sortBy($value,$type = 'string',$direction = 'ASC'){
+    public function sortBy($values,$type = 'string'){
 
         $array = $this -> items;
-        usort($array,function($a,$b) use($value,$type,$direction){
+        $total = count($values);
 
-            $a = $a -> {$value};
-            $b = $b -> {$value};
+        usort($array,function($a1,$b1) use($values,$total){
 
-            switch($type){
-                case 'string':
-                    return $direction == 'ASC' ? strcmp($a,$b) : strcmp($b,$a);
-                break;
-                case 'number':
-                    return $direction == 'ASC' ? $a > $b : $b > $a;
-                break;
+            $n = 0;
+
+            foreach($values as $value => $info){
+                $a = $a1 -> {$value};
+                $b = $b1 -> {$value};
+
+                $direction = $info['direction'];
+                $type = $info['type'];
+
+                if($a == $b){
+                    $r = false;
+                }else{
+
+                    switch($type){
+                        case 'string':
+                            $r = $direction == 'ASC' ? strcmp($a,$b) : strcmp($b,$a);
+                        break;
+                        case 'number':
+                            $r = $direction == 'ASC' ? $b - $a : $b - $a;
+                        break;
+                    }
+
+                }
+
+                if($r)
+                    return $r;
+
+                if($total == $n)
+                    return false;
+
+                $n++;
             }
         });
 
