@@ -17,5 +17,16 @@ class Cfg{
 	public static function all(){
 		return static::$resource;
 	}
+
+	public static function add($name,$values){
+		
+		if(is_array($values)){
+			foreach($values as $n => $value){
+				self::add($name.".".$n,$value);
+			}
+		}else{
+			self::set($name,$values);
+		}
+	}
 }
 ?>
