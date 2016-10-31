@@ -116,6 +116,16 @@ class Collection implements ArrayAccess, Countable, Iterator, JsonSerializable{
     }
 
     /**
+     * Return if empty
+     * 
+     * @return boolean
+     */
+    public function isEmpty(){
+        return count($this -> items) == 0;
+    }
+
+
+    /**
      * to json
      *
      * @return array
