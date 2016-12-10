@@ -49,6 +49,10 @@ class Cache{
 	 */
 	public static function getFile($name){
 		$name = Str::filename($name);
+
+		if(!file_exists(self::getDir())){
+			mkdir(self::getDir(),0755,true);
+		}
 		
 		return self::getDir()."/"."cache-".$name.".cache";
 	}
@@ -109,6 +113,9 @@ class Cache{
 	 * @param mixed $value
 	 */
 	public static function set($name,$value,$expire = 31536000){
+
+		
+
 
 		file_put_contents(self::getFile($name),serialize($value));
 		self::setExpiring($name,$expire);
