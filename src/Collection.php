@@ -290,10 +290,22 @@ class Collection implements ArrayAccess, Countable, Iterator, JsonSerializable{
             $n = 0;
 
             foreach($values as $value => $info){
-                $a = $a1 -> {$value};
-                $b = $b1 -> {$value};
 
-                $direction = $info['direction'];
+                if(is_object($a1) && is_object($b1)){
+
+                    $a = $a1 -> {$value};
+                    $b = $b1 -> {$value};
+                
+                }else{
+
+                    $a = $a1[$value];
+                    $b = $b1[$value];
+
+                }
+
+                $direction =  strtoupper($info['direction']);
+
+
                 $type = $info['type'];
 
                 if($a == $b){
