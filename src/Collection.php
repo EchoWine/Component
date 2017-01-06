@@ -336,9 +336,24 @@ class Collection implements ArrayAccess, Countable, Iterator, JsonSerializable{
         return new Collection($array);
     }
     
+    /**
+     * Map the array
+     *
+     * @param Closure $closure
+     *
+     * @return Collection
+     */
     public function map($closure){
-        return new Collection(array_map($closure,$this -> items));
+        $return = new static();
+
+        foreach($this -> items as $key => $value){
+            $return[$key] = $closure($value,$key);
+        }
+
+        return $return;
     }
+
+
 
 
     /**
