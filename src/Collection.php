@@ -229,6 +229,23 @@ class Collection implements ArrayAccess, Countable, Iterator, JsonSerializable{
         return $this -> items;
     }
 
+    /**
+     * Return a sum of closure
+     *
+     * @param closure $closure
+     *
+     * @return float
+     */
+    public function sum($closure){
+        
+        $total = 0;
+
+        foreach($this -> items as $item)
+            $total += $closure($item);
+
+        return $total;
+    }
+
 
     /**
      * Where not
