@@ -14,13 +14,21 @@ class DateTime extends \DateTime implements JsonSerializable{
      */
     public function __construct($datetime = null,$timezone = null){
         if($timezone == null){
-             new \DateTimeZone('Europe/Rome');
+            new \DateTimeZone('Europe/Rome');
         }
+
+        if(!empty($datetime) && !strtotime($datetime))
+            throw new \Exception("DateTime {$datetime} isn't valid");
+
         parent::__construct($datetime,$timezone);
     }
 
     public static function createFromFormat($format,$value,$object = null){
         $datetime = parent::createFromFormat($format,$value,$object);
+        
+        if(!$datetime)
+            throw new \Exception("DateTime {$value} isn't valid");
+
         return new static($datetime -> format('Y-m-d H:i:s'));
     }
 
@@ -178,7 +186,7 @@ class DateTime extends \DateTime implements JsonSerializable{
      * @return self
      */
     public static function createByDate($day,$month,$year){
-        return new self($year."-".$month."-".$day." 00:00:00");
+        return new static($year."-".$month."-".$day." 00:00:00");
     }
 
     /**
@@ -190,7 +198,7 @@ class DateTime extends \DateTime implements JsonSerializable{
      * @return self
      */
     public static function createByMonthAndYear($month,$year){
-        return new self($year."-".$month."-01 00:00:00");
+        return static::createFromFormat("Y-m-d",$year."-".$month."-01");
     }
 
     /**
