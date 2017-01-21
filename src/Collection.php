@@ -331,6 +331,8 @@ class Collection implements ArrayAccess, Countable, Iterator, JsonSerializable{
 
                     switch($type){
                         case 'string':
+                            $a = strtolower($a);
+                            $b = strtolower($b);
                             $r = $direction == 'ASC' ? strcmp($a,$b) : strcmp($b,$a);
                         break;
                         case 'number':
