@@ -230,6 +230,7 @@ class DateTime extends \DateTime implements JsonSerializable{
     public function createCollectionMonth($weeks = false){
         
         $date = $this -> startMonth();
+        $date -> setTime(00,00,00);
 
         $collection = new Collection();
 
